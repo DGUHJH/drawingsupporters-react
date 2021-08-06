@@ -1,4 +1,6 @@
 import { Box } from '@material-ui/core';
+import Footer from 'components/Footer/pc';
+import Header from 'components/Header/pc';
 import Main from 'pages/Main/pc';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -26,9 +28,11 @@ class App extends React.Component<{}, { width: number }> {
 	render() {
 		return (
 			<Box>
+				<Header />
 				<Switch>
 					<Route exact path="/" component={Main} />
 				</Switch>
+				<Footer />
 			</Box>
 		);
 	}

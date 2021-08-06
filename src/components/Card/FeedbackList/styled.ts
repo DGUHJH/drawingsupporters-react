@@ -10,6 +10,7 @@ export const Root = styled(Container)`
 		margin-bottom: 12px;
 		display: flex;
 		justify-content: space-between;
+		cursor: pointer;
 	}
 `;
 

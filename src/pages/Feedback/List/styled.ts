@@ -16,7 +16,7 @@ export const TitleTypo = styled(Typography)`
 	&&& {
 		font-family: 'Noto Sans Regular';
 		font-weight: bold;
-		font-size: 32px;
+		font-size: 40px;
 		display: flex;
 		text-align: center;
 		margin-top: 60px;

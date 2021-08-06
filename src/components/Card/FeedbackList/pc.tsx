@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import * as Styled from './styled';
 
 type Props = {
@@ -8,8 +9,14 @@ type Props = {
 };
 
 const FeedbackListCard: React.FC<Props> = ({ username, title, chipList }) => {
+	const history = useHistory();
+
+	const onCardClick = () => {
+		history.push('/feedback/details/1');
+	};
+
 	return (
-		<Styled.Root>
+		<Styled.Root onClick={onCardClick}>
 			<Styled.LeftContainer>
 				<Styled.UserContainer>
 					<Styled.UserProfileImg />

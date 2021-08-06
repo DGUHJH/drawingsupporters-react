@@ -3,6 +3,7 @@ import Footer from 'components/Footer/pc';
 import Header from 'components/Header/pc';
 import FeedbackRequest from 'pages/Feedback/Request/pc';
 import Main from 'pages/Main/pc';
+import UserLogin from 'pages/User/Login/pc';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
@@ -31,6 +32,7 @@ class App extends React.Component<{}, { width: number }> {
 			<Box>
 				<Header />
 				<Switch>
+					<Route exact path="/user/login" component={UserLogin} />
 					<Route exact path="/feedback/request" component={FeedbackRequest} />
 					<Route exact path="/" component={Main} />
 				</Switch>

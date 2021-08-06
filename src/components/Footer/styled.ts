@@ -1,6 +1,11 @@
 import { Box, Container, Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
+export const Body = styled(Box)`
+	width: 100%;
+	border-top: 1px #eaeaea solid;
+`;
+
 export const Root = styled(Container)`
 	&&& {
 		height: 240px;

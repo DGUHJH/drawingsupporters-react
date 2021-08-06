@@ -53,11 +53,13 @@ export const RightContainer = styled(Box)`
 `;
 
 export const LoginButton = styled(Button)`
-	width: 77px;
-	height: 36px;
-	background: #248cd7;
-	border-radius: 8px;
-	margin-right: 20px;
+	&&& {
+		width: 77px;
+		height: 36px;
+		background: #248cd7;
+		border-radius: 8px;
+		margin-right: 20px;
+	}
 `;
 
 export const LoginButtonTypo = styled(Typography)`

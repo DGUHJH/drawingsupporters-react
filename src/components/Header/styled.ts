@@ -41,10 +41,14 @@ export const MenuContainer = styled(Box)`
 
 export const MenuTypo = styled(Typography)`
 	&&& {
+		height: 99px;
 		font-family: 'Noto Sans Regular';
 		font-size: 20px;
 		margin-left: 40px;
 		cursor: pointer;
+		display: flex;
+		align-items: center;
+		border-bottom: 2px white solid;
 	}
 `;
 

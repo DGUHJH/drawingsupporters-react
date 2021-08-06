@@ -1,2 +1,12 @@
-* {
+@font-face {
+	font-family: 'Noto Sans';
+	src: url('./assets/fonts/NotoSansKR-Black.otf') format('truetype');
+}
+@font-face {
+	font-family: 'Noto Sans Light';
+	src: url('./assets/fonts/NotoSansKR-Light.otf') format('truetype');
+}
+@font-face {
+	font-family: 'Noto Sans Regular';
+	src: url('./assets/fonts/NotoSansKR-Regular.otf') format('truetype');
 }

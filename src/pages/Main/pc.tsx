@@ -1,4 +1,5 @@
 import banner1 from 'assets/images/banner4.png';
+import FeedbackRequest from 'pages/Feedback/Request/pc';
 import React from 'react';
 import * as Styled from './styled';
 
@@ -19,6 +20,7 @@ const Main = () => {
 					<Styled.BannerImg src={banner1} />
 				</Styled.BannerImgContainer>
 			</Styled.BannerContainer>
+			<FeedbackRequest />
 		</Styled.Root>
 	);
 };

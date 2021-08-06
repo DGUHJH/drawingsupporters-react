@@ -17,12 +17,12 @@ export const Root = styled(Box)`
 
 export const JoinContainer = styled(Box)`
 	width: 800px;
-	height: 1050px;
 	border: 1px #e4e4e4 solid;
 	border-radius: 8px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-bottom: 60px;
 `;
 
 export const JoinTitleTypo = styled(Typography)`

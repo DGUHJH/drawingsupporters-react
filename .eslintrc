@@ -73,7 +73,8 @@
     "operator-linebreak": "off",
     "camelcase": "off",
     "react/no-unescaped-entities": "off",
-    "quotes": "off"
+    "quotes": "off",
+    "react/no-unused-state": "off"
 
   }
 }

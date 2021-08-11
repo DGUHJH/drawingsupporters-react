@@ -8,8 +8,6 @@ export const Root = styled(Box)`
 export const BannerContainer = styled(Box)`
 	width: 100%;
 	height: 768px;
-	display: flex;
-	flex-direction: column;
 	margin-top: 60px;
 	border-bottom: 1px #eaeaea solid;
 `;
@@ -34,9 +32,17 @@ export const BannerTitleTypoBlue = styled.span`
 
 export const BannerImgContainer = styled(Container)`
 	&&& {
+		width: 100%;
 		padding: 0;
 		margin-top: 40px;
+		overflow: hidden;
 	}
+`;
+
+export const BannerImgWrapper = styled(Box)`
+	width: 100%;
+	display: flex;
+	justify-content: center;
 `;
 
 export const BannerImg = styled.img`

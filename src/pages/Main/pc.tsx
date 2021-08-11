@@ -1,7 +1,19 @@
-import banner1 from 'assets/images/banner4.png';
+import banner1 from 'assets/images/banner1.png';
+import banner2 from 'assets/images/banner2.png';
+import banner3 from 'assets/images/banner3.png';
+import banner4 from 'assets/images/banner4.png';
 import FeedbackRequest from 'pages/Feedback/Request/pc';
 import React from 'react';
+import SwiperCore, { A11y, Autoplay, Scrollbar } from 'swiper';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import * as Styled from './styled';
+
+SwiperCore.use([Scrollbar, A11y, Autoplay]);
+
+const bannerList = [banner1, banner2, banner3, banner4];
 
 const Main = () => {
 	return (
@@ -17,7 +29,25 @@ const Main = () => {
 					</Styled.BannerTitleTypo>
 				</Styled.BannerTitleContainer>
 				<Styled.BannerImgContainer>
-					<Styled.BannerImg src={banner1} />
+					<Swiper
+						slidesPerView={1}
+						pagination={{ clickable: true }}
+						onSwiper={(swiper) => console.log(swiper)}
+						onSlideChange={(swiper) => {}}
+						autoplay={true}
+						style={{ width: '1280px' }}
+					>
+						{bannerList.map((banner, index) => (
+							<SwiperSlide
+								style={{ width: '1280px' }}
+								key={`banner_swiper_slide_${index}`}
+							>
+								<Styled.BannerImgWrapper>
+									<Styled.BannerImg src={banner} />
+								</Styled.BannerImgWrapper>
+							</SwiperSlide>
+						))}
+					</Swiper>
 				</Styled.BannerImgContainer>
 			</Styled.BannerContainer>
 			<FeedbackRequest />

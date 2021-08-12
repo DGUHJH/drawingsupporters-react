@@ -52,6 +52,13 @@ export const MenuTypo = styled(Typography)`
 	}
 `;
 
+export const MenuPointTypo = styled.span`
+	&&& {
+		font-size: 24px;
+		font-weight: bold;
+	}
+`;
+
 export const RightContainer = styled(Box)`
 	display: flex;
 `;

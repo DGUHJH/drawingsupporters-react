@@ -1,21 +1,38 @@
+import { cookies } from 'api/methods/cookies';
+import { userInfo } from 'api/user';
 import logo from 'assets/images/logo.png';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import * as Styled from './styled';
+
+const point = {
+	color: '#248cd7',
+	borderBottom: '2px #248cd7 solid',
+};
 
 const Header = () => {
 	const history = useHistory();
 	const location = useLocation();
-	const point = {
-		color: '#248cd7',
-		borderBottom: '2px #248cd7 solid',
-	};
+	const [nickname, setNickname] = useState<string>('');
 
 	const onMenuClick = (url: string) => () => {
 		history.push(url);
 	};
 
-	console.log('location', location.pathname);
+	const onLogout = () => {
+		cookies.remove('access_token');
+		cookies.remove('refresh_token');
+		history.go(0);
+	};
+
+	useEffect(() => {
+		userInfo().then((res) => {
+			if (res?.status === 200) {
+				setNickname(res.data);
+			}
+			console.log(res);
+		});
+	}, [history, location]);
 
 	return (
 		<Styled.Root>
@@ -40,12 +57,23 @@ const Header = () => {
 					</Styled.MenuContainer>
 				</Styled.LeftContainer>
 				<Styled.RightContainer>
-					<Styled.LoginButton onClick={onMenuClick('/user/login')}>
-						<Styled.LoginButtonTypo>로그인</Styled.LoginButtonTypo>
-					</Styled.LoginButton>
-					<Styled.JoinButton onClick={onMenuClick('/user/join')}>
-						<Styled.JoinButtonTypo>회원가입</Styled.JoinButtonTypo>
-					</Styled.JoinButton>
+					{nickname === '' ? (
+						<>
+							<Styled.LoginButton onClick={onMenuClick('/user/login')}>
+								<Styled.LoginButtonTypo>로그인</Styled.LoginButtonTypo>
+							</Styled.LoginButton>
+							<Styled.JoinButton onClick={onMenuClick('/user/join')}>
+								<Styled.JoinButtonTypo>회원가입</Styled.JoinButtonTypo>
+							</Styled.JoinButton>
+						</>
+					) : (
+						<>
+							<Styled.MenuTypo>
+								<Styled.MenuPointTypo>{nickname}</Styled.MenuPointTypo>&nbsp;님
+							</Styled.MenuTypo>
+							<Styled.MenuTypo onClick={onLogout}>로그아웃</Styled.MenuTypo>
+						</>
+					)}
 				</Styled.RightContainer>
 			</Styled.RootContainer>
 		</Styled.Root>

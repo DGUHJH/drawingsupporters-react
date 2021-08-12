@@ -84,7 +84,7 @@ export const RightContainer = styled(Box)`
 	padding-right: 12px;
 `;
 
-export const FeedbackRequestImg = styled(Box)`
+export const FeedbackRequestImg = styled.img`
 	width: 140px;
 	height: 140px;
 	background: #0003;

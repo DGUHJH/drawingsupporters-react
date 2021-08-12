@@ -22,6 +22,7 @@ const Header = () => {
 	const onLogout = () => {
 		cookies.remove('access_token');
 		cookies.remove('refresh_token');
+		history.push('/');
 		history.go(0);
 	};
 
@@ -30,7 +31,6 @@ const Header = () => {
 			if (res?.status === 200) {
 				setNickname(res.data);
 			}
-			console.log(res);
 		});
 	}, [history, location]);
 

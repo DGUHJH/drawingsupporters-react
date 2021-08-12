@@ -3,16 +3,24 @@ import { useHistory } from 'react-router';
 import * as Styled from './styled';
 
 type Props = {
+	id: number;
 	username: string;
 	title: string;
 	chipList: string[];
+	thumbnail: string;
 };
 
-const FeedbackListCard: React.FC<Props> = ({ username, title, chipList }) => {
+const FeedbackListCard: React.FC<Props> = ({
+	id,
+	username,
+	title,
+	chipList,
+	thumbnail,
+}) => {
 	const history = useHistory();
 
 	const onCardClick = () => {
-		history.push('/feedback/details/1');
+		history.push(`/feedback/details/${id}`);
 	};
 
 	return (
@@ -32,7 +40,7 @@ const FeedbackListCard: React.FC<Props> = ({ username, title, chipList }) => {
 				</Styled.RequestChipContainer>
 			</Styled.LeftContainer>
 			<Styled.RightContainer>
-				<Styled.FeedbackRequestImg />
+				<Styled.FeedbackRequestImg src={thumbnail} />
 			</Styled.RightContainer>
 		</Styled.Root>
 	);

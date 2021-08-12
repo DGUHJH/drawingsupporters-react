@@ -10,6 +10,7 @@ const point = {
 
 const FeedbackList = () => {
 	const [select, setSelect] = useState(0);
+	const [requestList, setRequestList] = useState([]);
 
 	const onMenuClick = (id: number) => () => {
 		setSelect(id);
@@ -17,6 +18,7 @@ const FeedbackList = () => {
 
 	useEffect(() => {
 		feedbackList().then((res) => {
+			setRequestList(res.data);
 			console.log('res', res);
 		});
 	}, []);
@@ -39,21 +41,15 @@ const FeedbackList = () => {
 				</Styled.MenuTypo>
 			</Styled.MenuContainer>
 			<Styled.CardContainer>
-				<FeedbackListCard
-					username="드로잉 초보"
-					title="캐릭터 그림 피드백 요청합니다."
-					chipList={['그림체', '스케치']}
-				/>
-				<FeedbackListCard
-					username="드로잉 초보"
-					title="캐릭터 그림 피드백 요청합니다."
-					chipList={['그림체', '스케치']}
-				/>
-				<FeedbackListCard
-					username="드로잉 초보"
-					title="캐릭터 그림 피드백 요청합니다."
-					chipList={['그림체', '스케치']}
-				/>
+				{requestList?.map((request: any, index: number) => (
+					<FeedbackListCard
+						id={request.id}
+						username="드로잉 초보"
+						title={request.title}
+						thumbnail={request.thumbnail}
+						chipList={['그림체', '스케치']}
+					/>
+				))}
 			</Styled.CardContainer>
 		</Styled.Root>
 	);

@@ -89,3 +89,21 @@ export const JoinSubmitButtonTypo = styled(Typography)`
 		color: white;
 	}
 `;
+
+export const DuplicateCheckButton = styled(Button)`
+	&&& {
+		width: 100px;
+		height: 50px;
+		background: #248bd7;
+		border-radius: 8px;
+	}
+`;
+
+export const DuplicateCheckButtonTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-weight: bold;
+		font-size: 18px;
+		color: white;
+	}
+`;

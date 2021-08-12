@@ -1,5 +1,6 @@
+import { feedbackList } from 'api/feedback';
 import FeedbackListCard from 'components/Card/FeedbackList/pc';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Styled from './styled';
 
 const point = {
@@ -13,6 +14,12 @@ const FeedbackList = () => {
 	const onMenuClick = (id: number) => () => {
 		setSelect(id);
 	};
+
+	useEffect(() => {
+		feedbackList().then((res) => {
+			console.log('res', res);
+		});
+	}, []);
 
 	return (
 		<Styled.Root>

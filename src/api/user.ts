@@ -17,7 +17,7 @@ type JoinProps = {
 	phone: string;
 };
 
-export const fetchLogin = async ({ email, password }: LoginProps) => {
+export const login = async ({ email, password }: LoginProps) => {
 	return await hFetch(`${requestUrl}/api/user/login`, 'post', false, {
 		email,
 		password,

@@ -1,4 +1,7 @@
-import React from 'react';
+import { cookies } from 'api/methods/cookies';
+import { login } from 'api/user';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import * as Styled from './styled';
 
 const height = 80;
@@ -20,6 +23,40 @@ const inputProps = {
 };
 
 const UserLogin = () => {
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const history = useHistory();
+
+	const onChange = (id: string) => (e: any) => {
+		if (id === 'email') {
+			setEmail(e.target.value);
+		} else if (id === 'password') {
+			setPassword(e.target.value);
+		}
+	};
+
+	const onSubmit = () => {
+		login({ email, password }).then((res) => {
+			if (res.status === 200) {
+				cookies.set('access_token', res.data.access_token);
+				cookies.set('refresh_token', res.data.refresh_token);
+				history.push('/');
+			} else {
+				alert(res.message);
+			}
+		});
+	};
+
+	const editorEnterEvent = (e: any) => {
+		if (e.key === 'Enter') {
+			onSubmit();
+		}
+	};
+
+	const onJoinButtonClick = () => {
+		history.push('/user/join');
+	};
+
 	return (
 		<Styled.Root>
 			<Styled.LoginContainer>
@@ -33,6 +70,9 @@ const UserLogin = () => {
 					variant="outlined"
 					InputLabelProps={InputLabelProps}
 					inputProps={inputProps}
+					value={email}
+					onChange={onChange('email')}
+					onKeyPress={editorEnterEvent}
 				/>
 				<Styled.RequestEditor
 					style={{ height }}
@@ -41,11 +81,14 @@ const UserLogin = () => {
 					variant="outlined"
 					InputLabelProps={InputLabelProps}
 					inputProps={inputProps}
+					value={password}
+					onChange={onChange('password')}
+					onKeyPress={editorEnterEvent}
 				/>
-				<Styled.LoginSubmitButton>
+				<Styled.LoginSubmitButton onClick={onSubmit}>
 					<Styled.LoginSubmitButtonTypo>로그인</Styled.LoginSubmitButtonTypo>
 				</Styled.LoginSubmitButton>
-				<Styled.JoinTypo>비밀번호 찾기 ㅣ 회원가입</Styled.JoinTypo>
+				<Styled.JoinTypo>회원가입</Styled.JoinTypo>
 			</Styled.LoginContainer>
 		</Styled.Root>
 	);

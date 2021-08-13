@@ -14,6 +14,7 @@ const Header = () => {
 	const history = useHistory();
 	const location = useLocation();
 	const [nickname, setNickname] = useState<string>('');
+	const [isMentor, setIsMentor] = useState<boolean>(false);
 
 	const onMenuClick = (url: string) => () => {
 		history.push(url);
@@ -28,8 +29,10 @@ const Header = () => {
 
 	useEffect(() => {
 		userInfo().then((res) => {
+			console.log(res);
 			if (res?.status === 200) {
-				setNickname(res.data);
+				setNickname(res.data.nickname);
+				setIsMentor(res.data.user_type !== 'mentee');
 			}
 		});
 	}, [history, location]);
@@ -69,7 +72,8 @@ const Header = () => {
 					) : (
 						<>
 							<Styled.MenuTypo>
-								<Styled.MenuPointTypo>{nickname}</Styled.MenuPointTypo>&nbsp;님
+								<Styled.MenuPointTypo>{nickname}</Styled.MenuPointTypo>&nbsp;
+								{isMentor ? '강사' : '학생'}님
 							</Styled.MenuTypo>
 							<Styled.MenuTypo onClick={onLogout}>로그아웃</Styled.MenuTypo>
 						</>

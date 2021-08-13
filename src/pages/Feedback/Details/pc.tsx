@@ -1,7 +1,18 @@
-import React from 'react';
+import { feedbackDetail } from 'api/feedback';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router';
 import * as Styled from './styled';
 
 const FeedbackDetails = () => {
+	const location = useLocation();
+
+	useEffect(() => {
+		console.log(location.pathname);
+		feedbackDetail(location.pathname.split('/')[3]).then((res) => {
+			console.log(res);
+		});
+	}, []);
+
 	return (
 		<Styled.Root>
 			<Styled.TitleTypo>피드백 상세</Styled.TitleTypo>

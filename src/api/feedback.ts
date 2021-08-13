@@ -2,7 +2,7 @@ import { hFetch } from './methods/hFetch';
 import { requestUrl } from './url';
 
 export const feedbackList = async () => {
-	return await hFetch(`${requestUrl}/api/drawing`, 'get', true);
+	return await hFetch(`${requestUrl}/api/feedback`, 'get', true);
 };
 
 export const feedbackDetail = async (id: string) => {

@@ -84,6 +84,17 @@ export const RequestImgNameWrapper = styled(Box)`
 	height: 80px;
 	background: #fafafa;
 	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	padding: 0 24px;
+	box-sizing: border-box;
+`;
+
+export const RequestImgNameWrapperTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-size: 20px;
+	}
 `;
 
 export const RequestPhoneNumberContainer = styled(Box)`

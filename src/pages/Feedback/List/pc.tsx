@@ -1,4 +1,4 @@
-import { feedbackList } from 'api/feedback';
+import { requestList as requestListFetch } from 'api/feedback';
 import FeedbackListCard from 'components/Card/FeedbackList/pc';
 import React, { useEffect, useState } from 'react';
 import * as Styled from './styled';
@@ -17,11 +17,13 @@ const FeedbackList = () => {
 	};
 
 	useEffect(() => {
-		feedbackList().then((res) => {
+		requestListFetch().then((res) => {
 			setRequestList(res.data);
 			console.log('res', res);
 		});
 	}, []);
+
+	console.log('request', requestList);
 
 	return (
 		<Styled.Root>
@@ -46,8 +48,8 @@ const FeedbackList = () => {
 						id={request.id}
 						username="드로잉 초보"
 						title={request.title}
-						thumbnail={request.thumbnail}
-						chipList={['그림체', '스케치']}
+						thumbnail={request.thumbnail_list[0]}
+						chipList={request.feedback_type.split(',')}
 					/>
 				))}
 			</Styled.CardContainer>

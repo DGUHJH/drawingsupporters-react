@@ -3,7 +3,7 @@ import { ReducerType } from 'features';
 import { StateType } from 'features/userInfo/loginSlice';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import * as Styled from './styled';
 
 type DataProps = {
@@ -19,6 +19,7 @@ type DataProps = {
 
 const FeedbackDetails = () => {
 	const location = useLocation();
+	const history = useHistory();
 	const requestId = location.pathname.split('/')[3];
 	const [data, setData] = useState<DataProps>();
 	const loginData = useSelector<ReducerType, StateType>((state) => state.login);
@@ -60,7 +61,9 @@ const FeedbackDetails = () => {
 					))}
 				</Styled.FeedbackImgContainer>
 				<Styled.RequestSubmitButtonContainer>
-					<Styled.RequestSubmitButton>
+					<Styled.RequestSubmitButton
+						onClick={() => history.push(`/feedback/feedback/${requestId}`)}
+					>
 						<Styled.RequestSubmitButtonTypo>
 							피드백하기
 						</Styled.RequestSubmitButtonTypo>

@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@material-ui/core';
+import { Box, Button, Container, Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const Root = styled(Container)`
@@ -91,4 +91,28 @@ export const FeedbackImg = styled.img`
 	border-radius: 8px;
 	margin-right: 20px;
 	object-fit: contain;
+`;
+
+export const RequestSubmitButtonContainer = styled(Box)`
+	width: 100%;
+	height: 80px;
+	margin-top: 100px;
+`;
+
+export const RequestSubmitButton = styled(Button)`
+	&&& {
+		width: 100%;
+		height: 100%;
+		border-radius: 8px;
+		background: #248bd7;
+	}
+`;
+
+export const RequestSubmitButtonTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-weight: bold;
+		font-size: 28px;
+		color: white;
+	}
 `;

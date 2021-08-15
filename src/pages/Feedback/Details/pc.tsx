@@ -1,5 +1,8 @@
 import { requestDetail } from 'api/feedback';
+import { ReducerType } from 'features';
+import { StateType } from 'features/userInfo/loginSlice';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import * as Styled from './styled';
 
@@ -18,6 +21,7 @@ const FeedbackDetails = () => {
 	const location = useLocation();
 	const requestId = location.pathname.split('/')[3];
 	const [data, setData] = useState<DataProps>();
+	const loginData = useSelector<ReducerType, StateType>((state) => state.login);
 
 	useEffect(() => {
 		requestDetail(requestId).then((res) => {
@@ -55,6 +59,13 @@ const FeedbackDetails = () => {
 						<Styled.FeedbackImg src={image_url} key={`feedback_img_${index}`} />
 					))}
 				</Styled.FeedbackImgContainer>
+				<Styled.RequestSubmitButtonContainer>
+					<Styled.RequestSubmitButton>
+						<Styled.RequestSubmitButtonTypo>
+							피드백하기
+						</Styled.RequestSubmitButtonTypo>
+					</Styled.RequestSubmitButton>
+				</Styled.RequestSubmitButtonContainer>
 			</Styled.FeedbackContainer>
 		</Styled.Root>
 	);

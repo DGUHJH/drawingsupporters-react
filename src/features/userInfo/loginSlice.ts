@@ -32,8 +32,8 @@ export const loginSlice = createSlice({
 			state.message = action.payload?.status?.message;
 		},
 		[authLogin.rejected.type]: (state, action) => {
-			state.nickname = '';
-			state.userType = '';
+			state.nickname = 'initialValue';
+			state.userType = 'initialValue';
 		},
 	},
 });

@@ -33,6 +33,8 @@ const Header = () => {
 		dispatch(authLogin());
 	}, [history, location]);
 
+	console.log('loginData', loginData);
+
 	return (
 		<Styled.Root>
 			<Styled.RootContainer>
@@ -56,7 +58,7 @@ const Header = () => {
 					</Styled.MenuContainer>
 				</Styled.LeftContainer>
 				<Styled.RightContainer>
-					{loginData.nickname === '' ? (
+					{loginData.nickname === 'initialValue' || !loginData.nickname ? (
 						<>
 							<Styled.LoginButton onClick={onMenuClick('/user/login')}>
 								<Styled.LoginButtonTypo>로그인</Styled.LoginButtonTypo>
@@ -69,10 +71,13 @@ const Header = () => {
 						<>
 							<Styled.MenuTypo>
 								<Styled.MenuPointTypo>
-									{loginData.nickname}
+									{loginData.nickname !== 'initialValue' && loginData.nickname}
 								</Styled.MenuPointTypo>
 								&nbsp;
-								{loginData.userType ? '강사' : '학생'}님
+								{loginData.nickname !== 'initialValue' && loginData.userType
+									? '강사'
+									: '학생'}
+								님
 							</Styled.MenuTypo>
 							<Styled.MenuTypo onClick={onLogout}>로그아웃</Styled.MenuTypo>
 						</>

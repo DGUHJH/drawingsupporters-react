@@ -35,8 +35,7 @@ export const JoinTitleTypo = styled(Typography)`
 		margin-top: 60px;
 	}
 `;
-
-export const MentorJoinLinkTypo = styled(Typography)`
+export const MenteeJoinLinkTypo = styled(Typography)`
 	&&& {
 		font-family: 'Noto Sans Regular';
 		font-weight: bold;

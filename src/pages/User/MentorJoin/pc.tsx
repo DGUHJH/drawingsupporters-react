@@ -1,5 +1,5 @@
 import { InputAdornment } from '@material-ui/core';
-import { checkEmail, checkNickname, join } from 'api/user';
+import { checkEmail, checkNickname, mentorJoin } from 'api/user';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import * as Styled from './styled';
@@ -88,11 +88,7 @@ const UserJoin = () => {
 		const data = {
 			email,
 			password,
-			desired_field: [],
 			nickname,
-			job: '',
-			marketing_agreement: agreement,
-			path_to_site_knowledge: [],
 			phone_number: phoneNumber,
 		};
 
@@ -109,7 +105,7 @@ const UserJoin = () => {
 		} else if (!agreement) {
 			alert('약관에 동의해주세요!');
 		} else {
-			join(data).then((res) => {
+			mentorJoin(data).then((res) => {
 				if (res?.status === 200) {
 					alert('회원가입이 완료되었습니다!');
 					history.replace('/');
@@ -129,11 +125,11 @@ const UserJoin = () => {
 					간편하게 가입하고 <br />
 					비대면 코칭을 경험해보세요.
 				</Styled.JoinTitleTypo>
-				<Styled.MentorJoinLinkTypo
+				<Styled.MenteeJoinLinkTypo
 					onClick={() => history.push('/user/mentor-join')}
 				>
-					이 폼은 학생용 가입 폼입니다. 멘토 가입은 여기를 클릭해주세요.
-				</Styled.MentorJoinLinkTypo>
+					이 폼은 멘토용 가입 폼입니다. 학생 가입은 여기를 클릭해주세요.
+				</Styled.MenteeJoinLinkTypo>
 				<Styled.RequestEditor
 					style={{ height: '100px', marginTop: '80px' }}
 					placeholder="아이디 (이메일 주소)"

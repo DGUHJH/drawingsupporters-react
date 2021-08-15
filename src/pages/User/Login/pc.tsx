@@ -88,7 +88,9 @@ const UserLogin = () => {
 				<Styled.LoginSubmitButton onClick={onSubmit}>
 					<Styled.LoginSubmitButtonTypo>로그인</Styled.LoginSubmitButtonTypo>
 				</Styled.LoginSubmitButton>
-				<Styled.JoinTypo>회원가입</Styled.JoinTypo>
+				<Styled.JoinTypo onClick={() => history.push('/user/join')}>
+					회원가입
+				</Styled.JoinTypo>
 			</Styled.LoginContainer>
 		</Styled.Root>
 	);

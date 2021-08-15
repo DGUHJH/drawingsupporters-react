@@ -54,3 +54,7 @@ export const checkNickname = async (nickname: string) => {
 		nickname,
 	});
 };
+
+export const mentorJoin = async (data: any) => {
+	return await hFetch(`${requestUrl}/api/mentor/signup`, 'post', false, data);
+};

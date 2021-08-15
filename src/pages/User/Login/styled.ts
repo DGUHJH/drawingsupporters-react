@@ -63,5 +63,6 @@ export const JoinTypo = styled(Typography)`
 		font-size: 24px;
 		color: #7e7e7e;
 		margin-top: 20px;
+		cursor: pointer;
 	}
 `;

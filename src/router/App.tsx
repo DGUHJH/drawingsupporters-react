@@ -7,6 +7,7 @@ import FeedbackRequest from 'pages/Feedback/Request/pc';
 import Main from 'pages/Main/pc';
 import UserJoin from 'pages/User/Join/pc';
 import UserLogin from 'pages/User/Login/pc';
+import MentorJoin from 'pages/User/MentorJoin/pc';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
@@ -37,6 +38,7 @@ class App extends React.Component<{}, { width: number }> {
 				<Switch>
 					<Route exact path="/user/login" component={UserLogin} />
 					<Route exact path="/user/join" component={UserJoin} />
+					<Route exact path="/user/mentor-join" component={MentorJoin} />
 					<Route exact path="/feedback/request" component={FeedbackRequest} />
 					<Route exact path="/feedback/list" component={FeedbackList} />
 					<Route

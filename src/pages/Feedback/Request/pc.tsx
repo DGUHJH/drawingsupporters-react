@@ -36,7 +36,11 @@ const FeedbackRequestPC = () => {
 	const imageFileUploadRef = useRef<any>();
 
 	const handleImageFileUpload = (e: any) => {
-		setImageFile(e.target.files[0]);
+		if (e.target.files[0].size < 1000000) {
+			setImageFile(e.target.files[0]);
+		} else {
+			alert('10MB 이하로 업로드해주세요!');
+		}
 	};
 
 	const onEditorChange = (id: string) => (e: any) => {

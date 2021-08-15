@@ -47,6 +47,16 @@ export const MenuTypo = styled(Typography)`
 	}
 `;
 
+export const DescriptionTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-weight: bold;
+		font-size: 14px;
+		color: #606060;
+		margin-top: 10px;
+	}
+`;
+
 export const ContentChipContainer = styled(Box)`
 	width: 100%;
 	display: flex;
@@ -72,12 +82,12 @@ export const ContentChipTypo = styled(Typography)`
 export const FeedbackImgContainer = styled(Box)`
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 `;
 
-export const FeedbackImg = styled(Box)`
-	width: 200px;
-	height: 200px;
-	background: #0003;
+export const FeedbackImg = styled.img`
+	width: 400px;
+	height: 400px;
 	border-radius: 8px;
 	margin-right: 20px;
 `;

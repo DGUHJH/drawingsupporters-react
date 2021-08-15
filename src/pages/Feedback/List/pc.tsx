@@ -46,7 +46,7 @@ const FeedbackList = () => {
 				{requestList?.map((request: any, index: number) => (
 					<FeedbackListCard
 						id={request.id}
-						username="드로잉 초보"
+						username={request.nickname}
 						title={request.title}
 						thumbnail={request.thumbnail_list[0]}
 						chipList={request.feedback_type.split(',')}

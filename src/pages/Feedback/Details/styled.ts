@@ -90,4 +90,5 @@ export const FeedbackImg = styled.img`
 	height: 400px;
 	border-radius: 8px;
 	margin-right: 20px;
+	object-fit: contain;
 `;

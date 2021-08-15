@@ -11,7 +11,7 @@ type DataProps = {
 	price_lower_limit: number;
 	price_upper_limit: number;
 	regist_date: string;
-	download_url: string[];
+	thumbnail_list: string[];
 };
 
 const FeedbackDetails = () => {
@@ -28,7 +28,7 @@ const FeedbackDetails = () => {
 
 	return (
 		<Styled.Root>
-			<Styled.TitleTypo>피드백 상세</Styled.TitleTypo>
+			<Styled.TitleTypo>피드백 요청 상세</Styled.TitleTypo>
 			<Styled.FeedbackContainer>
 				<Styled.FeedbackTitleTypo>{data?.title}</Styled.FeedbackTitleTypo>
 				<Styled.MenuTypo>피드백 유형</Styled.MenuTypo>
@@ -49,9 +49,9 @@ const FeedbackDetails = () => {
 					</Styled.ContentChip>
 				</Styled.ContentChipContainer>
 
-				<Styled.MenuTypo>피드백 이미지</Styled.MenuTypo>
+				<Styled.MenuTypo>피드백 요청 이미지</Styled.MenuTypo>
 				<Styled.FeedbackImgContainer>
-					{data?.download_url?.map((image_url: string, index: number) => (
+					{data?.thumbnail_list?.map((image_url: string, index: number) => (
 						<Styled.FeedbackImg src={image_url} key={`feedback_img_${index}`} />
 					))}
 				</Styled.FeedbackImgContainer>

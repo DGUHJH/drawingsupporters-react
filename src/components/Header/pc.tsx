@@ -1,7 +1,9 @@
 import { cookies } from 'api/methods/cookies';
-import { userInfo } from 'api/user';
 import logo from 'assets/images/logo.png';
-import React, { useEffect, useState } from 'react';
+import { ReducerType } from 'features';
+import { authLogin, StateType } from 'features/userInfo/loginSlice';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import * as Styled from './styled';
 
@@ -13,8 +15,8 @@ const point = {
 const Header = () => {
 	const history = useHistory();
 	const location = useLocation();
-	const [nickname, setNickname] = useState<string>('');
-	const [isMentor, setIsMentor] = useState<boolean>(false);
+	const dispatch = useDispatch();
+	const loginData = useSelector<ReducerType, StateType>((state) => state.login);
 
 	const onMenuClick = (url: string) => () => {
 		history.push(url);
@@ -28,13 +30,7 @@ const Header = () => {
 	};
 
 	useEffect(() => {
-		userInfo().then((res) => {
-			console.log(res);
-			if (res?.status === 200) {
-				setNickname(res.data.nickname);
-				setIsMentor(res.data.user_type !== 'mentee');
-			}
-		});
+		dispatch(authLogin());
 	}, [history, location]);
 
 	return (
@@ -60,7 +56,7 @@ const Header = () => {
 					</Styled.MenuContainer>
 				</Styled.LeftContainer>
 				<Styled.RightContainer>
-					{nickname === '' ? (
+					{loginData.nickname === '' ? (
 						<>
 							<Styled.LoginButton onClick={onMenuClick('/user/login')}>
 								<Styled.LoginButtonTypo>로그인</Styled.LoginButtonTypo>
@@ -72,8 +68,11 @@ const Header = () => {
 					) : (
 						<>
 							<Styled.MenuTypo>
-								<Styled.MenuPointTypo>{nickname}</Styled.MenuPointTypo>&nbsp;
-								{isMentor ? '강사' : '학생'}님
+								<Styled.MenuPointTypo>
+									{loginData.nickname}
+								</Styled.MenuPointTypo>
+								&nbsp;
+								{loginData.userType ? '강사' : '학생'}님
 							</Styled.MenuTypo>
 							<Styled.MenuTypo onClick={onLogout}>로그아웃</Styled.MenuTypo>
 						</>

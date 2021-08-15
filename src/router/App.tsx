@@ -2,6 +2,7 @@ import { Box } from '@material-ui/core';
 import Footer from 'components/Footer/pc';
 import Header from 'components/Header/pc';
 import FeedbackDetails from 'pages/Feedback/Details/pc';
+import Feedback from 'pages/Feedback/Feedback/pc';
 import FeedbackList from 'pages/Feedback/List/pc';
 import FeedbackRequest from 'pages/Feedback/Request/pc';
 import Main from 'pages/Main/pc';
@@ -36,6 +37,7 @@ class App extends React.Component<{}, { width: number }> {
 			<Box>
 				<Header />
 				<Switch>
+					<Route exact path="/feedback/feedback/:id" component={Feedback} />
 					<Route exact path="/user/login" component={UserLogin} />
 					<Route exact path="/user/join" component={UserJoin} />
 					<Route exact path="/user/mentor-join" component={MentorJoin} />

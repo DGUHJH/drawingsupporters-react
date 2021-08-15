@@ -6,6 +6,7 @@ import {
 	TextField,
 	Typography,
 } from '@material-ui/core';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import styled from 'styled-components';
 
 export const Root = styled(Container)`
@@ -162,5 +163,13 @@ export const RequestSubmitButtonTypo = styled(Typography)`
 		font-weight: bold;
 		font-size: 28px;
 		color: white;
+	}
+`;
+
+export const EndDatePicker = styled(KeyboardDatePicker)`
+	&&& {
+		width: 628px;
+		height: 80px;
+		margin-bottom: 20px;
 	}
 `;

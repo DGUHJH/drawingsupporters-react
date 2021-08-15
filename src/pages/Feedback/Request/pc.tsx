@@ -1,5 +1,6 @@
 import { InputAdornment } from '@material-ui/core';
 import { feedbackRequest } from 'api/feedback';
+import 'date-fns';
 import React, { useRef, useState } from 'react';
 import * as Styled from './styled';
 
@@ -27,7 +28,7 @@ const FeedbackRequestPC = () => {
 	const [field, setField] = useState<string>('');
 	const [type, setType] = useState<string>('');
 	const [desiredPrice, setDesiredPrice] = useState<number>();
-	const [endDate, setEndDate] = useState();
+	const [endDate, setEndDate] = useState('2021-08-30');
 	const [details, setDetails] = useState('');
 	const [phoneNumber, setPhoneNumber] = useState();
 	const [agreement, setAgreement] = useState(false);
@@ -54,14 +55,14 @@ const FeedbackRequestPC = () => {
 			setType(e.target.value);
 		} else if (id === 'desiredPrice') {
 			setDesiredPrice(e.target.value.replace(numberTest, ''));
-		} else if (id === 'endDate') {
-			setEndDate(e.target.value);
 		} else if (id === 'details') {
 			setDetails(e.target.value);
 		} else if (id === 'phoneNumber') {
 			setPhoneNumber(e.target.value);
 		} else if (id === 'agreement') {
 			setAgreement(e.target.checked);
+		} else if (id === 'endDate') {
+			setEndDate(e.target.checked);
 		}
 	};
 
@@ -91,7 +92,7 @@ const FeedbackRequestPC = () => {
 				price_lower_limit: desiredPrice,
 				price_upper_limit: desiredPrice,
 				feedback_type: [type],
-				end_time: '2021-08-20',
+				end_time: endDate,
 				phone_number: phoneNumber,
 				feedback_file_type: 'image',
 			};
@@ -104,6 +105,11 @@ const FeedbackRequestPC = () => {
 
 			console.log(typeof imageBlob);
 		}
+	};
+
+	const handleDateChange = (date: any) => {
+		console.log('date', date);
+		setEndDate(date.target.value);
 	};
 
 	return (
@@ -158,11 +164,12 @@ const FeedbackRequestPC = () => {
 					<Styled.RequestEditor
 						style={{ height }}
 						placeholder="희망 마감기한"
+						type="date"
 						variant="outlined"
 						InputLabelProps={InputLabelProps}
 						inputProps={inputProps}
 						value={endDate}
-						onChange={onEditorChange('endDate')}
+						onChange={handleDateChange}
 					/>
 				</Styled.RequestDetailInfoWrapper>
 				<Styled.RequestTitleEditor

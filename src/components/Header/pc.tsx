@@ -25,6 +25,8 @@ const Header = () => {
 	const onLogout = () => {
 		cookies.remove('access_token');
 		cookies.remove('refresh_token');
+		cookies.remove('access_token');
+		cookies.remove('refresh_token');
 		history.push('/');
 		history.go(0);
 	};
@@ -74,10 +76,7 @@ const Header = () => {
 									{loginData.nickname !== 'initialValue' && loginData.nickname}
 								</Styled.MenuPointTypo>
 								&nbsp;
-								{loginData.nickname !== 'initialValue' && loginData.userType
-									? '강사'
-									: '학생'}
-								님
+								{loginData.userType !== 'mentee' ? '강사' : '학생'}님
 							</Styled.MenuTypo>
 							<Styled.MenuTypo onClick={onLogout}>로그아웃</Styled.MenuTypo>
 						</>

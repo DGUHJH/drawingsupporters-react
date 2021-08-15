@@ -1,4 +1,4 @@
-import { hFetch, hFormFetch } from './methods/hFetch';
+import { hFetch } from './methods/hFetch';
 import { requestUrl } from './url';
 
 export const requestList = async () => {
@@ -18,12 +18,12 @@ export const feedbackDetail = async (id: string) => {
 };
 
 export const feedbackRequest = async (formData: any) => {
-	return await hFormFetch(`${requestUrl}/api/drawing`, 'post', formData);
-	// return await hFetch(
-	// 	`${requestUrl}/api/drawing`,
-	// 	'post',
-	// 	true,
-	// 	formData,
-	// 	true
-	// );
+	// return await hFormFetch(`${requestUrl}/api/drawing`, 'post', formData);
+	return await hFetch(
+		`${requestUrl}/api/drawing`,
+		'post',
+		true,
+		formData,
+		true
+	);
 };

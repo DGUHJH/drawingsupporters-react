@@ -15,7 +15,8 @@ export const hFetch = async (
 
 	if (authorization && formData) {
 		headers = {
-			'Content-type': 'multipart/form-data',
+			'Content-Type':
+				'multipart/form-data; boundary=<calculated when request is sent>',
 			Authorization: `Bearer ${token}`,
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Headers': '*',
@@ -57,8 +58,6 @@ export const hFetch = async (
 export const hFormFetch = async (url: string, type: FetchType, body?: any) => {
 	const token = cookies.get('access_token');
 	const headers = {
-		'Content-type':
-			'multipart/form-data boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
 		Authorization: `Bearer ${token}`,
 		'Access-Control-Allow-Origin': '*',
 		'Access-Control-Allow-Headers': '*',

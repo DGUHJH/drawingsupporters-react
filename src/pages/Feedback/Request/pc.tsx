@@ -61,7 +61,7 @@ const FeedbackRequestPC = () => {
 		}
 	};
 
-	const onSubmit = () => {
+	const onSubmit = async () => {
 		if (title === '') {
 			alert('제목을 입력해주세요!');
 		} else if (field === '') {
@@ -80,15 +80,7 @@ const FeedbackRequestPC = () => {
 			alert('사이트 게시에 동의해주세요!');
 		} else {
 			const formData = new FormData();
-			const properties = new FormData();
-			// properties.append('title', title);
-			// properties.append('description', details);
-			// properties.append('price_lower_limit', `${desiredPrice}`);
-			// properties.append('price_upper_limit', `${desiredPrice}`);
-			// properties.append('feedback_type', JSON.stringify([type]));
-			// properties.append('end_time', `${endDate}`);
-			// properties.append('phone_number', `${phoneNumber}`);
-
+			const imageBlob = await new Blob([imageFile], { type: 'image/*' });
 			const data: any = {
 				title,
 				description: details,
@@ -99,16 +91,16 @@ const FeedbackRequestPC = () => {
 				phone_number: phoneNumber,
 				feedback_file_type: 'image',
 			};
-			formData.append('properties', data);
-			formData.append('file', imageFile);
-			formData.append('file', imageFile);
-			formData.append('file', imageFile);
+			const dataBlob = await new Blob([JSON.stringify(data)], {
+				type: 'application/json',
+			});
+			formData.append('properties', dataBlob);
+			formData.append('file', imageBlob);
+			await feedbackRequest(formData);
 
-			feedbackRequest(formData);
+			console.log(typeof imageBlob);
 		}
 	};
-
-	console.log(imageFile);
 
 	return (
 		<Styled.Root>
@@ -191,6 +183,7 @@ const FeedbackRequestPC = () => {
 				<input
 					type="file"
 					name="file"
+					accept="image/*"
 					onChange={(e) => handleImageFileUpload(e)}
 					style={{ display: 'none' }}
 					ref={imageFileUploadRef}

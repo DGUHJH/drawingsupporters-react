@@ -47,9 +47,15 @@ const Feedback = () => {
 			<Styled.MenuContainer>
 				<Styled.RequestContainer>
 					<Styled.MenuTitleTypo>요청 사항</Styled.MenuTitleTypo>
+					<Styled.RequestTypoContainer>
+						<Styled.RequestTitleTypo>제목</Styled.RequestTitleTypo>
+						<Styled.RequestTypo>{data?.title}</Styled.RequestTypo>
+						<Styled.RequestTitleTypo>요청사항</Styled.RequestTitleTypo>
+						<Styled.RequestTypo>{data?.description}</Styled.RequestTypo>
+					</Styled.RequestTypoContainer>
 				</Styled.RequestContainer>
 				<Styled.SubmitButton>
-					<Styled.SubmitButtonTypo>제출</Styled.SubmitButtonTypo>
+					<Styled.SubmitButtonTypo>저장</Styled.SubmitButtonTypo>
 				</Styled.SubmitButton>
 			</Styled.MenuContainer>
 		</Styled.Root>

@@ -61,6 +61,7 @@ export const DrawContainer = styled(Box)`
 export const FeedbackRequestImg = styled.img`
 	width: 616px;
 	height: 724px;
+	object-fit: contain;
 `;
 
 export const RequestContainer = styled(Box)`
@@ -85,5 +86,36 @@ export const SubmitButtonTypo = styled(Typography)`
 		font-weight: bold;
 		font-size: 16px;
 		color: white;
+	}
+`;
+
+export const RequestTypoContainer = styled(Box)`
+	width: 100%;
+	height: 600px;
+	overflow-y: scroll;
+	&&& {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	margin-top: 10px;
+`;
+
+export const RequestTitleTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-size: 18px;
+		font-weight: bold;
+		margin-top: 5px;
+	}
+`;
+
+export const RequestTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-size: 16px;
+		margin-top: 5px;
 	}
 `;

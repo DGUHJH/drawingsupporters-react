@@ -27,3 +27,14 @@ export const feedbackRequest = async (formData: any) => {
 		true
 	);
 };
+
+export const feedback = async (id: string, formData: any) => {
+	// return await hFormFetch(`${requestUrl}/api/drawing`, 'post', formData);
+	return await hFetch(
+		`${requestUrl}/api/feedback`,
+		'post',
+		true,
+		formData,
+		true
+	);
+};

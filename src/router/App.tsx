@@ -1,10 +1,11 @@
 import { Box } from '@material-ui/core';
 import Footer from 'components/Footer/pc';
 import Header from 'components/Header/pc';
-import FeedbackDetails from 'pages/Feedback/Details/pc';
 import Feedback from 'pages/Feedback/Feedback/pc';
+import FeedbackDetails from 'pages/Feedback/FeedbackDetails/pc';
 import FeedbackList from 'pages/Feedback/List/pc';
 import FeedbackRequest from 'pages/Feedback/Request/pc';
+import RequestDetails from 'pages/Feedback/RequestDetails/pc';
 import Main from 'pages/Main/pc';
 import UserJoin from 'pages/User/Join/pc';
 import UserLogin from 'pages/User/Login/pc';
@@ -48,6 +49,7 @@ class App extends React.Component<{}, { width: number }> {
 						path="/feedback/details/:id"
 						component={FeedbackDetails}
 					/>
+					<Route exact path="/request/details/:id" component={RequestDetails} />
 					<Route exact path="/" component={Main} />
 				</Switch>
 				<Footer />

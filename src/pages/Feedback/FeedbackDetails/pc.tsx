@@ -1,4 +1,5 @@
 import { requestDetail } from 'api/feedback';
+import FeedbackCard from 'components/Card/Feedback/pc';
 import { ReducerType } from 'features';
 import { StateType } from 'features/userInfo/loginSlice';
 import React, { useEffect, useState } from 'react';
@@ -37,7 +38,7 @@ const FeedbackDetails = () => {
 			<Styled.TitleTypo>피드백 요청 상세</Styled.TitleTypo>
 			<Styled.FeedbackContainer>
 				<Styled.FeedbackTitleTypo>{data?.title}</Styled.FeedbackTitleTypo>
-				<Styled.MenuTypo>피드백 유형</Styled.MenuTypo>
+				<Styled.MenuTypo>요청사항</Styled.MenuTypo>
 				<Styled.DescriptionTypo>{data?.description}</Styled.DescriptionTypo>
 				<Styled.MenuTypo>피드백 분야</Styled.MenuTypo>
 				<Styled.ContentChipContainer>
@@ -61,18 +62,8 @@ const FeedbackDetails = () => {
 						<Styled.FeedbackImg src={image_url} key={`feedback_img_${index}`} />
 					))}
 				</Styled.FeedbackImgContainer>
-				{loginData.userType === 'mentor' && (
-					<Styled.RequestSubmitButtonContainer>
-						<Styled.RequestSubmitButton
-							onClick={() => history.push(`/feedback/feedback/${requestId}`)}
-						>
-							<Styled.RequestSubmitButtonTypo>
-								피드백하기
-							</Styled.RequestSubmitButtonTypo>
-						</Styled.RequestSubmitButton>
-					</Styled.RequestSubmitButtonContainer>
-				)}
 			</Styled.FeedbackContainer>
+			<FeedbackCard requestId={requestId} />
 		</Styled.Root>
 	);
 };

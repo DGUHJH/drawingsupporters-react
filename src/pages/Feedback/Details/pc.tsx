@@ -14,6 +14,7 @@ type DataProps = {
 	price_lower_limit: number;
 	price_upper_limit: number;
 	regist_date: string;
+	deadline: string;
 	thumbnail_list: string[];
 };
 
@@ -47,10 +48,10 @@ const FeedbackDetails = () => {
 					))}
 				</Styled.ContentChipContainer>
 
-				<Styled.MenuTypo>작성 일자</Styled.MenuTypo>
+				<Styled.MenuTypo>마감 일자</Styled.MenuTypo>
 				<Styled.ContentChipContainer>
 					<Styled.ContentChip>
-						<Styled.ContentChipTypo>{data?.regist_date}</Styled.ContentChipTypo>
+						<Styled.ContentChipTypo>{data?.deadline}</Styled.ContentChipTypo>
 					</Styled.ContentChip>
 				</Styled.ContentChipContainer>
 
@@ -60,15 +61,17 @@ const FeedbackDetails = () => {
 						<Styled.FeedbackImg src={image_url} key={`feedback_img_${index}`} />
 					))}
 				</Styled.FeedbackImgContainer>
-				<Styled.RequestSubmitButtonContainer>
-					<Styled.RequestSubmitButton
-						onClick={() => history.push(`/feedback/feedback/${requestId}`)}
-					>
-						<Styled.RequestSubmitButtonTypo>
-							피드백하기
-						</Styled.RequestSubmitButtonTypo>
-					</Styled.RequestSubmitButton>
-				</Styled.RequestSubmitButtonContainer>
+				{loginData.userType === 'mentor' && (
+					<Styled.RequestSubmitButtonContainer>
+						<Styled.RequestSubmitButton
+							onClick={() => history.push(`/feedback/feedback/${requestId}`)}
+						>
+							<Styled.RequestSubmitButtonTypo>
+								피드백하기
+							</Styled.RequestSubmitButtonTypo>
+						</Styled.RequestSubmitButton>
+					</Styled.RequestSubmitButtonContainer>
+				)}
 			</Styled.FeedbackContainer>
 		</Styled.Root>
 	);

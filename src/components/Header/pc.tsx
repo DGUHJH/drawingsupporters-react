@@ -35,8 +35,6 @@ const Header = () => {
 		dispatch(authLogin());
 	}, [history, location]);
 
-	console.log('loginData', loginData);
-
 	return (
 		<Styled.Root>
 			<Styled.RootContainer>

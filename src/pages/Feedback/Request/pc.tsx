@@ -92,7 +92,7 @@ const FeedbackRequestPC = () => {
 				price_lower_limit: desiredPrice,
 				price_upper_limit: desiredPrice,
 				feedback_type: [type],
-				end_time: endDate,
+				deadline: endDate,
 				phone_number: phoneNumber,
 				feedback_file_type: 'image',
 			};

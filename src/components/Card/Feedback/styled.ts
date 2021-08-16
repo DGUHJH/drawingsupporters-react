@@ -53,6 +53,21 @@ export const FeedbackImgButtonTypo = styled(Typography)`
 	}
 `;
 
+export const FeedbackEditorContainer = styled(Box)`
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+`;
+
+export const FeedbackEditorTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-size: 20px;
+		color: #707070;
+		cursor: pointer;
+	}
+`;
+
 export const FeedbackImgNameWrapper = styled(Box)`
 	width: 1068px;
 	height: 80px;

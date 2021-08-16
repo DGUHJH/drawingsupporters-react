@@ -1,5 +1,6 @@
 import { feedback } from 'api/feedback';
 import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router';
 import * as Styled from './styled';
 
 type Props = {
@@ -32,6 +33,7 @@ const FeedbackCard: React.FC<Props> = ({ requestId }) => {
 	const [imageFile, setImageFile] = useState<any>();
 
 	const imageFileUploadRef = useRef<any>();
+	const history = useHistory();
 
 	const handleImageFileUpload = (e: any) => {
 		if (e.target.files[0].size < 1000000) {
@@ -73,6 +75,10 @@ const FeedbackCard: React.FC<Props> = ({ requestId }) => {
 			feedback(requestId, formData);
 			console.log(typeof imageBlob);
 		}
+	};
+
+	const onFeedbackEditorClick = () => {
+		window.open(`/feedback/feedback/${requestId}`);
 	};
 
 	return (
@@ -129,6 +135,11 @@ const FeedbackCard: React.FC<Props> = ({ requestId }) => {
 						</Styled.FeedbackImgNameWrapperTypo>
 					</Styled.FeedbackImgNameWrapper>
 				</Styled.FeedbackImgContainer>
+				<Styled.FeedbackEditorContainer>
+					<Styled.FeedbackEditorTypo onClick={onFeedbackEditorClick}>
+						피드백 에디터 바로가기
+					</Styled.FeedbackEditorTypo>
+				</Styled.FeedbackEditorContainer>
 				<Styled.FeedbackSubmitButtonContainer>
 					<Styled.FeedbackSubmitButton onClick={onSubmit}>
 						<Styled.FeedbackSubmitButtonTypo>

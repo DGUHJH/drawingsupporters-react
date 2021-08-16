@@ -6,19 +6,21 @@ type Props = {
 	id: number;
 	username: string;
 	title: string;
+	chipList: string[];
 	thumbnail: string;
 };
 
-const FeedbackListCard: React.FC<Props> = ({
+const RequestListCard: React.FC<Props> = ({
 	id,
 	username,
 	title,
+	chipList,
 	thumbnail,
 }) => {
 	const history = useHistory();
 
 	const onCardClick = () => {
-		history.push(`/feedback/details/${id}`);
+		history.push(`/request/details/${id}`);
 	};
 
 	return (
@@ -29,6 +31,13 @@ const FeedbackListCard: React.FC<Props> = ({
 					<Styled.UsernameTypo>{username}</Styled.UsernameTypo>
 				</Styled.UserContainer>
 				<Styled.RequestTitleTypo>{title}</Styled.RequestTitleTypo>
+				<Styled.RequestChipContainer>
+					{chipList?.map((value, index) => (
+						<Styled.RequestChipWrapper key={`feedback_list_card_${index}`}>
+							<Styled.RequestChipTypo>{value}</Styled.RequestChipTypo>
+						</Styled.RequestChipWrapper>
+					))}
+				</Styled.RequestChipContainer>
 			</Styled.LeftContainer>
 			<Styled.RightContainer>
 				<Styled.FeedbackRequestImg src={thumbnail} />
@@ -37,4 +46,4 @@ const FeedbackListCard: React.FC<Props> = ({
 	);
 };
 
-export default FeedbackListCard;
+export default RequestListCard;

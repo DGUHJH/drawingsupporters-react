@@ -1,4 +1,5 @@
 import { Box, Button, Container, Typography } from '@material-ui/core';
+import CanvasDraw from 'react-canvas-draw';
 import styled from 'styled-components';
 
 export const Root = styled(Container)`
@@ -36,9 +37,49 @@ export const LayerContainer = styled(Box)`
 	box-sizing: border-box;
 `;
 
+export const LayerElementContainer = styled(Box)`
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+`;
+
+export const LayerElement = styled(Box)`
+	width: 260px;
+	height: 46px;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	padding: 12px;
+	box-sizing: border-box;
+	background: #f6f6f6;
+	cursor: pointer;
+	margin-bottom: 10px;
+`;
+
+export const LayerElementTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-weight: bold;
+		font-size: 16px;
+		color: #7d7d7d;
+	}
+`;
+
+export const BrushContainer = styled(Box)`
+	width: 300px;
+	height: 120px;
+	display: flex;
+	flex-direction: column;
+	border: 1px #0003 solid;
+	border-radius: 8px;
+	padding: 20px;
+	box-sizing: border-box;
+	margin-top: 20px;
+`;
+
 export const ColorContainer = styled(Box)`
 	width: 300px;
-	height: 480px;
+	height: 400px;
 	display: flex;
 	flex-direction: column;
 	border: 1px #0003 solid;
@@ -56,12 +97,40 @@ export const DrawContainer = styled(Box)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background: #f6f6f6;
+	position: relative;
+`;
+
+export const DrawCanvas = styled(CanvasDraw)`
+	&&& {
+		width: 640px;
+		height: 748px;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+`;
+
+export const SketchPickerContainer = styled(Box)`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+`;
+
+export const BrushRadiusContainer = styled(Box)`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
 `;
 
 export const FeedbackRequestImg = styled.img`
 	width: 616px;
 	height: 724px;
 	object-fit: contain;
+	background: #fff;
+	border-radius: 8px;
 `;
 
 export const RequestContainer = styled(Box)`

@@ -63,7 +63,9 @@ const FeedbackDetails = () => {
 					))}
 				</Styled.FeedbackImgContainer>
 			</Styled.FeedbackContainer>
-			<FeedbackCard requestId={requestId} />
+			{loginData?.userType === 'mentor' && (
+				<FeedbackCard requestId={requestId} />
+			)}
 		</Styled.Root>
 	);
 };

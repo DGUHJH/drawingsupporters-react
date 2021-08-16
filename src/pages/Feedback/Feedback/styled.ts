@@ -89,7 +89,13 @@ export const ColorContainer = styled(Box)`
 	margin-top: 20px;
 `;
 
-export const DrawContainer = styled(Box)`
+export const DrawContainer = styled.div`
+	width: 640px;
+	height: 748px;
+	position: relative;
+`;
+
+export const DrawWrapper = styled(Box)`
 	width: 640px;
 	height: 748px;
 	border-radius: 8px;
@@ -129,8 +135,11 @@ export const FeedbackRequestImg = styled.img`
 	width: 616px;
 	height: 724px;
 	object-fit: contain;
-	background: #fff;
+	background: #0001;
 	border-radius: 8px;
+	position: absolute;
+	top: 0;
+	left: 0;
 `;
 
 export const RequestContainer = styled(Box)`

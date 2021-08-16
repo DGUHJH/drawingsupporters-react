@@ -2,10 +2,11 @@ import { Slider } from '@material-ui/core';
 import { requestDetail } from 'api/feedback';
 import { ReducerType } from 'features';
 import { StateType } from 'features/userInfo/loginSlice';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import { SketchPicker } from 'react-color';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
+import { createFileName, useScreenshot } from 'use-react-screenshot';
 import * as Styled from './styled';
 
 type DataProps = {
@@ -26,6 +27,7 @@ const Feedback = () => {
 	const [brushColor, setBrushColor] = useState('#000');
 	const canvasRef: any[] = [useRef<any>(), useRef<any>(), useRef<any>()];
 	const [canvasData, setCanvasData] = useState<any[]>([null, null, null]);
+
 	const requestId = location.pathname.split('/')[3];
 	const [data, setData] = useState<DataProps>();
 	const [selectedLayer, setSelectedLayer] = useState([true, false, false]);
@@ -41,6 +43,7 @@ const Feedback = () => {
 		setSelectedLayer((prev) => {
 			return prev.map((value, index) => (index === id ? !value : value));
 		});
+		takeScreenShot(drawRef.current);
 	};
 
 	const onBrushRadiusChange = (e: any, newValue: any) => {
@@ -54,8 +57,24 @@ const Feedback = () => {
 		});
 	}, []);
 
-	console.log(canvasData);
+	const drawRef = createRef<any>();
+	const [image, takeScreenShot] = useScreenshot({
+		type: 'image/png',
+		quality: 1.0,
+	});
 
+	const download = (
+		imageData: any,
+		{ name = 'drawingsupporters', extension = 'png' } = {}
+	) => {
+		const a = document.createElement('a');
+		a.href = imageData;
+		a.download = createFileName(extension, name);
+		a.click();
+	};
+
+	const downloadScreenshot = () =>
+		takeScreenShot(drawRef.current).then(download);
 	return (
 		<Styled.Root>
 			<Styled.MenuContainer>
@@ -85,6 +104,7 @@ const Feedback = () => {
 							step={1}
 							onChange={onBrushRadiusChange}
 							max={20}
+							min={1}
 							valueLabelDisplay="auto"
 						/>
 					</Styled.BrushRadiusContainer>
@@ -100,25 +120,29 @@ const Feedback = () => {
 					</Styled.SketchPickerContainer>
 				</Styled.ColorContainer>
 			</Styled.MenuContainer>
-			<Styled.DrawContainer>
-				{selectedLayer.map((value: boolean, index: number) => (
-					<Styled.DrawCanvas
-						ref={(canvasDraw: any) => (canvasRef[index] = canvasDraw)}
-						canvasWidth={640}
-						canvasHeight={748}
-						backgroundColor="#0000"
-						imgSrc={'https://t1.daumcdn.net/cfile/tistory/99BACC445A4B25F20B'}
-						hideInterface
-						hideGrid
-						background="#0000"
-						key={`draw_canvas_${index}`}
-						style={value ? {} : { zIndex: -1 }}
-						saveData={canvasData[index]}
-						brushRadius={brushRadius}
-						brushColor={brushColor}
-					/>
-				))}
-				<Styled.FeedbackRequestImg src={data?.thumbnail_list[0]} />
+			<Styled.DrawContainer
+				ref={drawRef}
+				// style={{ background: `no-repeat url("${data?.thumbnail_list[0]}")` }}
+			>
+				<Styled.DrawWrapper>
+					<Styled.FeedbackRequestImg src={data?.thumbnail_list[0]} />
+					{selectedLayer.map((value: boolean, index: number) => (
+						<Styled.DrawCanvas
+							ref={(canvasDraw: any) => (canvasRef[index] = canvasDraw)}
+							canvasWidth={640}
+							canvasHeight={748}
+							backgroundColor="#0000"
+							hideInterface
+							hideGrid
+							background="#0000"
+							key={`draw_canvas_${index}`}
+							style={value ? {} : { zIndex: -1 }}
+							saveData={canvasData[index]}
+							brushRadius={brushRadius}
+							brushColor={brushColor}
+						/>
+					))}
+				</Styled.DrawWrapper>
 			</Styled.DrawContainer>
 			<Styled.MenuContainer>
 				<Styled.RequestContainer>
@@ -130,7 +154,11 @@ const Feedback = () => {
 						<Styled.RequestTypo>{data?.description}</Styled.RequestTypo>
 					</Styled.RequestTypoContainer>
 				</Styled.RequestContainer>
-				<Styled.SubmitButton>
+				<Styled.SubmitButton
+					variant="contained"
+					color="primary"
+					onClick={downloadScreenshot}
+				>
 					<Styled.SubmitButtonTypo>저장</Styled.SubmitButtonTypo>
 				</Styled.SubmitButton>
 			</Styled.MenuContainer>

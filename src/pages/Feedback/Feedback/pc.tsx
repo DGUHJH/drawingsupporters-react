@@ -1,5 +1,5 @@
 import { Slider } from '@material-ui/core';
-import { requestDetail } from 'api/feedback';
+import { feedback, requestDetail } from 'api/feedback';
 import { ReducerType } from 'features';
 import { StateType } from 'features/userInfo/loginSlice';
 import React, { createRef, useEffect, useRef, useState } from 'react';
@@ -71,7 +71,7 @@ const Feedback = () => {
 
 	useEffect(() => {
 		requestDetail(requestId).then((res) => {
-			setData(res.data);
+			setData(res.data.drawing_info);
 			console.log(res);
 		});
 	}, []);
@@ -93,7 +93,45 @@ const Feedback = () => {
 	};
 
 	const downloadScreenshot = () =>
-		takeScreenShot(drawRef.current).then(download);
+		takeScreenShot(drawRef.current).then(onSubmit);
+
+	const [title, setTitle] = useState('');
+	const [description, setDescription] = useState('');
+
+	const onEditorChange = (id: string) => (e: any) => {
+		if (id === 'title') {
+			setTitle(e.target.value);
+		} else if (id === 'description') {
+			setDescription(e.target.value);
+		}
+	};
+
+	const onSubmit = () => {
+		if (title === '') {
+			alert('제목을 입력해주세요!');
+		} else if (description === '') {
+			alert('내용을 입력해주세요!');
+		} else {
+			const formData = new FormData();
+			const imageBlob = new Blob([image], { type: 'image/*' });
+			const jsonData: any = {
+				title,
+				description,
+				price: 0,
+				feedback_file_type: 'image',
+			};
+			const dataBlob = new Blob([JSON.stringify(jsonData)], {
+				type: 'application/json',
+			});
+			formData.append('properties', dataBlob);
+			formData.append('file', imageBlob);
+			feedback(requestId, formData).then((res) => {
+				alert('피드백이 완료되었습니다!');
+				history.replace('/');
+			});
+		}
+	};
+
 	return (
 		<Styled.Root>
 			<Styled.MenuContainer>
@@ -182,6 +220,8 @@ const Feedback = () => {
 							variant="outlined"
 							InputLabelProps={InputLabelProps}
 							inputProps={inputProps}
+							value={title}
+							onChange={onEditorChange('title')}
 						/>
 						<Styled.FeedbackDescriptionEditor
 							placeholder="내용"
@@ -195,6 +235,8 @@ const Feedback = () => {
 								},
 							}}
 							multiline={true}
+							value={description}
+							onChange={onEditorChange('description')}
 						/>
 					</Styled.FeedbackEditorContainer>
 				</Styled.FeedbackContainer>

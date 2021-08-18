@@ -1,5 +1,6 @@
 import { requestDetail } from 'api/feedback';
 import FeedbackCard from 'components/Card/Feedback/pc';
+import FeedbackDetailsCard from 'components/Card/FeedbackDetails/pc';
 import { ReducerType } from 'features';
 import { StateType } from 'features/userInfo/loginSlice';
 import React, { useEffect, useState } from 'react';
@@ -24,11 +25,13 @@ const FeedbackDetails = () => {
 	const history = useHistory();
 	const requestId = location.pathname.split('/')[3];
 	const [data, setData] = useState<DataProps>();
+	const [feedbackData, setFeedbackData] = useState<any[]>([]);
 	const loginData = useSelector<ReducerType, StateType>((state) => state.login);
 
 	useEffect(() => {
 		requestDetail(requestId).then((res) => {
 			setData(res.data.drawing_info);
+			setFeedbackData(res.data.feedback_info_list);
 			console.log(res);
 		});
 	}, []);
@@ -63,6 +66,16 @@ const FeedbackDetails = () => {
 					))}
 				</Styled.FeedbackImgContainer>
 			</Styled.FeedbackContainer>
+			<Styled.FeedbackDetailsCardContainer>
+				{feedbackData?.map((value: any, index: number) => (
+					<FeedbackDetailsCard
+						title={value?.title}
+						description={value?.description}
+						imageSrl={value?.thumbnail[0]}
+						key={`feedback_details_card_${index}`}
+					/>
+				))}
+			</Styled.FeedbackDetailsCardContainer>
 			{loginData?.userType === 'mentor' && (
 				<FeedbackCard requestId={requestId} />
 			)}

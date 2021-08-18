@@ -18,7 +18,11 @@ const FeedbackList = () => {
 	const [feedbackList, setFeedbackList] = useState([]);
 
 	const onMenuClick = (id: number) => () => {
-		setSelect(id);
+		if (id === 1) {
+			alert('구현 중인 기능입니다!');
+		} else {
+			setSelect(id);
+		}
 	};
 
 	useEffect(() => {

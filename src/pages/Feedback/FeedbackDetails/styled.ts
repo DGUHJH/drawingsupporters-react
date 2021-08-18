@@ -116,3 +116,9 @@ export const RequestSubmitButtonTypo = styled(Typography)`
 		color: white;
 	}
 `;
+
+export const FeedbackDetailsCardContainer = styled(Box)`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+`;

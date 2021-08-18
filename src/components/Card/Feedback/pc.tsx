@@ -83,67 +83,11 @@ const FeedbackCard: React.FC<Props> = ({ requestId }) => {
 
 	return (
 		<Styled.Root>
-			<Styled.FeedbackTitleTypo>피드백 하기</Styled.FeedbackTitleTypo>
 			<Styled.FeedbackContainer>
-				<Styled.FeedbackEditor
-					style={{ height }}
-					placeholder="제목"
-					variant="outlined"
-					InputLabelProps={InputLabelProps}
-					inputProps={inputProps}
-					value={title}
-					onChange={onEditorChange('title')}
-				/>
-				<Styled.FeedbackEditor
-					style={{ height: '260px' }}
-					placeholder="피드백 내용 (최대 200자)"
-					variant="outlined"
-					InputLabelProps={InputLabelProps}
-					inputProps={{
-						style: {
-							height: 200,
-							fontSize,
-							padding: '8px 12px',
-							lineHeight: '120%',
-						},
-					}}
-					value={description}
-					onChange={onEditorChange('description')}
-					multiline={true}
-				/>
-				<Styled.FeedbackImgContainer>
-					<input
-						type="file"
-						name="file"
-						accept="image/*"
-						onChange={(e) => handleImageFileUpload(e)}
-						style={{ display: 'none' }}
-						ref={imageFileUploadRef}
-					/>
-					<Styled.FeedbackImgButton
-						onClick={() => {
-							imageFileUploadRef && imageFileUploadRef.current.click();
-						}}
-					>
-						<Styled.FeedbackImgButtonTypo>
-							이미지 업로드
-						</Styled.FeedbackImgButtonTypo>
-					</Styled.FeedbackImgButton>
-					<Styled.FeedbackImgNameWrapper>
-						<Styled.FeedbackImgNameWrapperTypo>
-							{imageFile?.name}
-						</Styled.FeedbackImgNameWrapperTypo>
-					</Styled.FeedbackImgNameWrapper>
-				</Styled.FeedbackImgContainer>
-				<Styled.FeedbackEditorContainer>
-					<Styled.FeedbackEditorTypo onClick={onFeedbackEditorClick}>
-						피드백 에디터 바로가기
-					</Styled.FeedbackEditorTypo>
-				</Styled.FeedbackEditorContainer>
 				<Styled.FeedbackSubmitButtonContainer>
-					<Styled.FeedbackSubmitButton onClick={onSubmit}>
+					<Styled.FeedbackSubmitButton onClick={onFeedbackEditorClick}>
 						<Styled.FeedbackSubmitButtonTypo>
-							제출하기
+							피드백하기
 						</Styled.FeedbackSubmitButtonTypo>
 					</Styled.FeedbackSubmitButton>
 				</Styled.FeedbackSubmitButtonContainer>

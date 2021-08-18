@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const Root = styled(Box)`
 	width: 100%;
-	margin-top: 50px;
 `;
 
 export const FeedbackTitleTypo = styled(Typography)`
@@ -18,7 +17,6 @@ export const FeedbackContainer = styled(Box)`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	margin-top: 50px;
 `;
 
 export const FeedbackEditor = styled(TextField)`

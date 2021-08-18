@@ -20,6 +20,25 @@ type DataProps = {
 	thumbnail_list: string[];
 };
 
+const height = 50;
+const fontSize = 14;
+const InputLabelProps = {
+	style: {
+		fontFamily: 'Noto Sans Regular',
+		height,
+		fontSize,
+	},
+};
+const inputProps = {
+	style: {
+		fontFamily: 'Noto Sans Regular',
+		height,
+		fontSize,
+		padding: '0 12px',
+		lineHeight: '120%',
+	},
+};
+
 const Feedback = () => {
 	const location = useLocation();
 	const history = useHistory();
@@ -106,6 +125,7 @@ const Feedback = () => {
 							max={20}
 							min={1}
 							valueLabelDisplay="auto"
+							style={{ color: '#248bd7' }}
 						/>
 					</Styled.BrushRadiusContainer>
 				</Styled.BrushContainer>
@@ -154,12 +174,36 @@ const Feedback = () => {
 						<Styled.RequestTypo>{data?.description}</Styled.RequestTypo>
 					</Styled.RequestTypoContainer>
 				</Styled.RequestContainer>
+				<Styled.FeedbackContainer>
+					<Styled.MenuTitleTypo>피드백 내용</Styled.MenuTitleTypo>
+					<Styled.FeedbackEditorContainer>
+						<Styled.FeedbackTitleEditor
+							placeholder="제목"
+							variant="outlined"
+							InputLabelProps={InputLabelProps}
+							inputProps={inputProps}
+						/>
+						<Styled.FeedbackDescriptionEditor
+							placeholder="내용"
+							variant="outlined"
+							InputLabelProps={InputLabelProps}
+							inputProps={{
+								style: {
+									height: 200,
+									fontSize,
+									lineHeight: '120%',
+								},
+							}}
+							multiline={true}
+						/>
+					</Styled.FeedbackEditorContainer>
+				</Styled.FeedbackContainer>
 				<Styled.SubmitButton
 					variant="contained"
 					color="primary"
 					onClick={downloadScreenshot}
 				>
-					<Styled.SubmitButtonTypo>저장</Styled.SubmitButtonTypo>
+					<Styled.SubmitButtonTypo>피드백 제출</Styled.SubmitButtonTypo>
 				</Styled.SubmitButton>
 			</Styled.MenuContainer>
 		</Styled.Root>

@@ -1,4 +1,10 @@
-import { Box, Button, Container, Typography } from '@material-ui/core';
+import {
+	Box,
+	Button,
+	Container,
+	TextField,
+	Typography,
+} from '@material-ui/core';
 import CanvasDraw from 'react-canvas-draw';
 import styled from 'styled-components';
 
@@ -137,14 +143,12 @@ export const FeedbackRequestImg = styled.img`
 	object-fit: contain;
 	background: #0001;
 	border-radius: 8px;
-	position: absolute;
-	top: 0;
-	left: 0;
 `;
 
 export const RequestContainer = styled(Box)`
 	width: 300px;
-	height: 676px;
+	height: 276px;
+	overflow-y: scroll;
 	border: 1px #0003 solid;
 	border-radius: 8px;
 	padding: 20px;
@@ -169,8 +173,6 @@ export const SubmitButtonTypo = styled(Typography)`
 
 export const RequestTypoContainer = styled(Box)`
 	width: 100%;
-	height: 600px;
-	overflow-y: scroll;
 	&&& {
 		-ms-overflow-style: none;
 		scrollbar-width: none;
@@ -195,5 +197,37 @@ export const RequestTypo = styled(Typography)`
 		font-family: 'Noto Sans Regular';
 		font-size: 16px;
 		margin-top: 5px;
+	}
+`;
+
+export const FeedbackContainer = styled(Box)`
+	width: 100%;
+	padding: 20px;
+	box-sizing: border-box;
+	border: 1px #0003 solid;
+	border-radius: 8px;
+	margin-top: 20px;
+`;
+
+export const FeedbackEditorContainer = styled(Box)`
+	width: 100%;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+`;
+
+export const FeedbackTitleEditor = styled(TextField)`
+	&&& {
+		width: 100%;
+		margin-top: 10px;
+		color: #248bd7;
+	}
+`;
+
+export const FeedbackDescriptionEditor = styled(TextField)`
+	&&& {
+		width: 100%;
+		margin-top: 10px;
+		color: #248bd7;
 	}
 `;

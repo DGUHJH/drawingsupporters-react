@@ -28,7 +28,7 @@ const FeedbackDetails = () => {
 
 	useEffect(() => {
 		requestDetail(requestId).then((res) => {
-			setData(res.data);
+			setData(res.data.drawing_info);
 			console.log(res);
 		});
 	}, []);

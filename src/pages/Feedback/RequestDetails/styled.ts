@@ -40,7 +40,7 @@ export const MenuTypo = styled(Typography)`
 	&&& {
 		font-family: 'Noto Sans Regular';
 		font-weight: bold;
-		font-size: 20px;
+		font-size: 24px;
 		color: #606060;
 		margin-bottom: 8px;
 		margin-top: 40px;
@@ -51,7 +51,7 @@ export const DescriptionTypo = styled(Typography)`
 	&&& {
 		font-family: 'Noto Sans Regular';
 		font-weight: bold;
-		font-size: 14px;
+		font-size: 20px;
 		color: #606060;
 		margin-top: 10px;
 	}

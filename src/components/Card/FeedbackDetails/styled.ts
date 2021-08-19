@@ -21,9 +21,8 @@ export const FeedbackTitleTypo = styled(Typography)`
 export const FeedbackDescriptionTypo = styled(Typography)`
 	&&& {
 		font-family: 'Noto Sans Regular';
-		font-weight: bold;
 		font-size: 20px;
-		margin-top: 10px;
+		margin-top: 20px;
 	}
 `;
 
@@ -33,5 +32,5 @@ export const FeedbackImg = styled.img`
 	border-radius: 8px;
 	margin-right: 20px;
 	object-fit: contain;
-	margin-top: 10px;
+	margin-top: 40px;
 `;

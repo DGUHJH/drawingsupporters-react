@@ -32,12 +32,8 @@ const FeedbackDetails = () => {
 		requestDetail(requestId).then((res) => {
 			setData(res.data.drawing_info);
 			setFeedbackData(res.data.feedback_info_list);
-			console.log(res);
 		});
 	}, []);
-
-	console.log('asd');
-	console.log('feedbackData', feedbackData);
 
 	return (
 		<Styled.Root>

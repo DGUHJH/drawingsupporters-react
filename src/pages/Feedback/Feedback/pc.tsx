@@ -56,7 +56,7 @@ const Feedback = () => {
 	const loginData = useSelector<ReducerType, StateType>((state) => state.login);
 
 	const handleImageFileUpload = (e: any) => {
-		if (e.target.files[0].size < 1000000) {
+		if (e.target.files[0].size < 10e6) {
 			setImageFile(e.target.files[0]);
 		} else {
 			alert('10MB 이하로 업로드해주세요!');
@@ -85,7 +85,6 @@ const Feedback = () => {
 	useEffect(() => {
 		requestDetail(requestId).then((res) => {
 			setData(res.data.drawing_info);
-			console.log(res);
 		});
 	}, []);
 
@@ -124,6 +123,8 @@ const Feedback = () => {
 			alert('제목을 입력해주세요!');
 		} else if (description === '') {
 			alert('내용을 입력해주세요!');
+		} else if (!imageFile) {
+			alert('피드백 이미지를 입력해주세요!');
 		} else {
 			const formData = new FormData();
 			const imageBlob = new Blob([imageFile], {
@@ -141,12 +142,9 @@ const Feedback = () => {
 			formData.append('properties', dataBlob);
 			formData.append('file', imageBlob, `${requestId}.png`);
 			feedback(requestId, formData).then((res) => {
-				// alert('피드백이 완료되었습니다!');
-				// history.replace('/');
-				console.log('성공');
+				alert('피드백이 완료되었습니다!');
+				history.replace('/');
 			});
-			console.log('image', typeof image);
-			console.log('imageBlob', imageBlob);
 		}
 	};
 
@@ -155,6 +153,8 @@ const Feedback = () => {
 		selectedLayer.forEach((value, index) => value && (a = index));
 		canvasRef[a].undo();
 	};
+
+	console.log(imageFile);
 
 	return (
 		<Styled.Root>

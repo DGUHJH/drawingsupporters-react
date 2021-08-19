@@ -16,7 +16,14 @@ const FeedbackDetailsCard: React.FC<Props> = ({
 		<Styled.Root>
 			<Styled.FeedbackTitleTypo>{title}</Styled.FeedbackTitleTypo>
 			<Styled.FeedbackDescriptionTypo>
-				{description}
+				{description.split('\n').map((line: string) => {
+					return (
+						<span>
+							{line}
+							<br />
+						</span>
+					);
+				})}
 			</Styled.FeedbackDescriptionTypo>
 			<Styled.FeedbackImg src={imageSrl} />
 		</Styled.Root>

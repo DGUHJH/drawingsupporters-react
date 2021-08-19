@@ -2,6 +2,7 @@ import { InputAdornment } from '@material-ui/core';
 import { feedbackRequest } from 'api/feedback';
 import 'date-fns';
 import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router';
 import * as Styled from './styled';
 
 const height = 80;
@@ -34,10 +35,13 @@ const FeedbackRequestPC = () => {
 	const [agreement, setAgreement] = useState(false);
 	const [imageFile, setImageFile] = useState<any>();
 
+	const history = useHistory();
+
 	const imageFileUploadRef = useRef<any>();
 
 	const handleImageFileUpload = (e: any) => {
-		if (e.target.files[0].size < 1000000) {
+		console.log(e.target.files[0].size);
+		if (e.target.files[0].size <= 10e6) {
 			setImageFile(e.target.files[0]);
 		} else {
 			alert('10MB 이하로 업로드해주세요!');
@@ -86,6 +90,8 @@ const FeedbackRequestPC = () => {
 		} else {
 			const formData = new FormData();
 			const imageBlob = await new Blob([imageFile], { type: 'image/*' });
+			formData.append('file', imageBlob);
+
 			const data: any = {
 				title,
 				description: details,
@@ -100,15 +106,14 @@ const FeedbackRequestPC = () => {
 				type: 'application/json',
 			});
 			formData.append('properties', dataBlob);
-			formData.append('file', imageBlob);
-			await feedbackRequest(formData);
-
-			console.log(typeof imageBlob);
+			feedbackRequest(formData).then((res) => {
+				alert('피드백이 완료되었습니다!');
+				history.replace('/');
+			});
 		}
 	};
 
 	const handleDateChange = (date: any) => {
-		console.log('date', date);
 		setEndDate(date.target.value);
 	};
 

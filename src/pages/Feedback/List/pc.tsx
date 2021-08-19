@@ -28,16 +28,11 @@ const FeedbackList = () => {
 	useEffect(() => {
 		requestListFetch().then((res) => {
 			setRequestList(res.data);
-			console.log('res', res);
 		});
 		feedbackListFetch().then((res) => {
 			setFeedbackList(res.data);
-			console.log('res', res);
 		});
 	}, []);
-
-	console.log('request', requestList);
-	console.log('feedback', feedbackList);
 
 	return (
 		<Styled.Root>

@@ -73,7 +73,6 @@ const FeedbackCard: React.FC<Props> = ({ requestId }) => {
 			formData.append('properties', dataBlob);
 			formData.append('file', imageBlob);
 			feedback(requestId, formData);
-			console.log(typeof imageBlob);
 		}
 	};
 

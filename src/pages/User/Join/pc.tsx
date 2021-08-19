@@ -120,8 +120,6 @@ const UserJoin = () => {
 		}
 	};
 
-	console.log('agreement', agreement);
-
 	return (
 		<Styled.Root>
 			<Styled.JoinContainer>

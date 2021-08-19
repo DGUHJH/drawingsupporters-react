@@ -16,7 +16,7 @@ const FeedbackDetailsCard: React.FC<Props> = ({
 		<Styled.Root>
 			<Styled.FeedbackTitleTypo>{title}</Styled.FeedbackTitleTypo>
 			<Styled.FeedbackDescriptionTypo>
-				{description.split('\n').map((line: string) => {
+				{description.split('\\n').map((line: string) => {
 					return (
 						<span>
 							{line}

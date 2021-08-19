@@ -41,7 +41,16 @@ const FeedbackDetails = () => {
 			<Styled.FeedbackContainer>
 				<Styled.FeedbackTitleTypo>{data?.title}</Styled.FeedbackTitleTypo>
 				<Styled.MenuTypo>요청사항</Styled.MenuTypo>
-				<Styled.DescriptionTypo>{data?.description}</Styled.DescriptionTypo>
+				<Styled.DescriptionTypo>
+					{data?.description.split('\\n').map((line: string) => {
+						return (
+							<span>
+								{line}
+								<br />
+							</span>
+						);
+					})}
+				</Styled.DescriptionTypo>
 				<Styled.MenuTypo>피드백 분야</Styled.MenuTypo>
 				<Styled.ContentChipContainer>
 					{data?.feedback_type?.map((type: string, index: number) => (

@@ -56,7 +56,7 @@ const Feedback = () => {
 	const loginData = useSelector<ReducerType, StateType>((state) => state.login);
 
 	const handleImageFileUpload = (e: any) => {
-		if (e.target.files[0].size < 10e6) {
+		if (e.target.files[0].size < 20e6) {
 			setImageFile(e.target.files[0]);
 		} else {
 			alert('10MB 이하로 업로드해주세요!');

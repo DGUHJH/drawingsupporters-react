@@ -88,13 +88,14 @@ const FeedbackRequestPC = () => {
 		} else if (!agreement) {
 			alert('사이트 게시에 동의해주세요!');
 		} else {
+			const formatDescription = details.replaceAll('\n', '\\n');
 			const formData = new FormData();
 			const imageBlob = await new Blob([imageFile], { type: 'image/*' });
 			formData.append('file', imageBlob);
 
 			const data: any = {
 				title,
-				description: details,
+				description: formatDescription,
 				price_lower_limit: desiredPrice,
 				price_upper_limit: desiredPrice,
 				feedback_type: [type],
@@ -107,7 +108,7 @@ const FeedbackRequestPC = () => {
 			});
 			formData.append('properties', dataBlob);
 			feedbackRequest(formData).then((res) => {
-				alert('피드백이 완료되었습니다!');
+				alert('피드백 요청이 완료되었습니다!');
 				history.replace('/');
 			});
 		}

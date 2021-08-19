@@ -126,13 +126,14 @@ const Feedback = () => {
 		} else if (!imageFile) {
 			alert('피드백 이미지를 입력해주세요!');
 		} else {
+			const formatDescription = description.replaceAll('\n', '\\n');
 			const formData = new FormData();
 			const imageBlob = new Blob([imageFile], {
 				type: 'image/png',
 			});
 			const jsonData: any = {
 				title,
-				description,
+				description: formatDescription,
 				price: 0,
 				feedback_file_type: 'image',
 			};
@@ -141,6 +142,7 @@ const Feedback = () => {
 			});
 			formData.append('properties', dataBlob);
 			formData.append('file', imageBlob, `${requestId}.png`);
+			console.log('formatDescription', formatDescription);
 			feedback(requestId, formData).then((res) => {
 				alert('피드백이 완료되었습니다!');
 				history.replace('/');

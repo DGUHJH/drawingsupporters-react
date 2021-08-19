@@ -42,27 +42,40 @@ const inputProps = {
 const Feedback = () => {
 	const location = useLocation();
 	const history = useHistory();
-	const [brushRadius, setBrushRadius] = useState<number>(12);
+	const [brushRadius, setBrushRadius] = useState<number>(6);
 	const [brushColor, setBrushColor] = useState('#000');
 	const canvasRef: any[] = [useRef<any>(), useRef<any>(), useRef<any>()];
 	const [canvasData, setCanvasData] = useState<any[]>([null, null, null]);
+	const [checkBackground, setCheckBackground] = useState<boolean>(true);
 
 	const requestId = location.pathname.split('/')[3];
 	const [data, setData] = useState<DataProps>();
 	const [selectedLayer, setSelectedLayer] = useState([true, false, false]);
-
+	const [imageFile, setImageFile] = useState<any>();
+	const imageFileUploadRef = useRef<any>();
 	const loginData = useSelector<ReducerType, StateType>((state) => state.login);
 
+	const handleImageFileUpload = (e: any) => {
+		if (e.target.files[0].size < 1000000) {
+			setImageFile(e.target.files[0]);
+		} else {
+			alert('10MB 이하로 업로드해주세요!');
+		}
+	};
+
 	const onLayerSelect = (id: number) => () => {
-		setCanvasData((prev) => {
-			return prev.map((value, index) => {
-				return id === index ? canvasRef[index]?.getSaveData() : value;
+		if (id !== 3) {
+			setCanvasData((prev) => {
+				return prev.map((value, index) => {
+					return id === index ? canvasRef[index]?.getSaveData() : value;
+				});
 			});
-		});
-		setSelectedLayer((prev) => {
-			return prev.map((value, index) => (index === id ? !value : value));
-		});
-		takeScreenShot(drawRef.current);
+			setSelectedLayer((prev) => {
+				return prev.map((value, index) => (index === id ? !value : value));
+			});
+		} else {
+			setCheckBackground((prev) => !prev);
+		}
 	};
 
 	const onBrushRadiusChange = (e: any, newValue: any) => {
@@ -93,7 +106,7 @@ const Feedback = () => {
 	};
 
 	const downloadScreenshot = () =>
-		takeScreenShot(drawRef.current).then(onSubmit);
+		takeScreenShot(drawRef.current).then(download);
 
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
@@ -113,7 +126,9 @@ const Feedback = () => {
 			alert('내용을 입력해주세요!');
 		} else {
 			const formData = new FormData();
-			const imageBlob = new Blob([image], { type: 'image/*' });
+			const imageBlob = new Blob([imageFile], {
+				type: 'image/png',
+			});
 			const jsonData: any = {
 				title,
 				description,
@@ -124,12 +139,21 @@ const Feedback = () => {
 				type: 'application/json',
 			});
 			formData.append('properties', dataBlob);
-			formData.append('file', imageBlob);
+			formData.append('file', imageBlob, `${requestId}.png`);
 			feedback(requestId, formData).then((res) => {
-				alert('피드백이 완료되었습니다!');
-				history.replace('/');
+				// alert('피드백이 완료되었습니다!');
+				// history.replace('/');
+				console.log('성공');
 			});
+			console.log('image', typeof image);
+			console.log('imageBlob', imageBlob);
 		}
+	};
+
+	const onUndoButtonClick = () => {
+		let a = 0;
+		selectedLayer.forEach((value, index) => value && (a = index));
+		canvasRef[a].undo();
 	};
 
 	return (
@@ -151,6 +175,16 @@ const Feedback = () => {
 								</Styled.LayerElementTypo>
 							</Styled.LayerElement>
 						))}
+						<Styled.LayerElement
+							onClick={onLayerSelect(3)}
+							style={checkBackground ? { background: '#248BD7' } : {}}
+						>
+							<Styled.LayerElementTypo
+								style={checkBackground ? { color: 'white' } : {}}
+							>
+								배경
+							</Styled.LayerElementTypo>
+						</Styled.LayerElement>
 					</Styled.LayerElementContainer>
 				</Styled.LayerContainer>
 				<Styled.BrushContainer>
@@ -183,7 +217,10 @@ const Feedback = () => {
 				// style={{ background: `no-repeat url("${data?.thumbnail_list[0]}")` }}
 			>
 				<Styled.DrawWrapper>
-					<Styled.FeedbackRequestImg src={data?.thumbnail_list[0]} />
+					<Styled.FeedbackRequestImg
+						style={checkBackground ? {} : { display: 'none' }}
+						src={data?.thumbnail_list[0]}
+					/>
 					{selectedLayer.map((value: boolean, index: number) => (
 						<Styled.DrawCanvas
 							ref={(canvasDraw: any) => (canvasRef[index] = canvasDraw)}
@@ -201,6 +238,23 @@ const Feedback = () => {
 						/>
 					))}
 				</Styled.DrawWrapper>
+				<Styled.DrawButtonContainer>
+					<Styled.DrawSequenceBackButton
+						variant="contained"
+						onClick={onUndoButtonClick}
+					>
+						<Styled.DrawSequenceButtonTypo>
+							되돌리기
+						</Styled.DrawSequenceButtonTypo>
+					</Styled.DrawSequenceBackButton>
+					<Styled.DrawDownloadButton
+						variant="contained"
+						color="primary"
+						onClick={downloadScreenshot}
+					>
+						<Styled.SubmitButtonTypo>다운로드</Styled.SubmitButtonTypo>
+					</Styled.DrawDownloadButton>
+				</Styled.DrawButtonContainer>
 			</Styled.DrawContainer>
 			<Styled.MenuContainer>
 				<Styled.RequestContainer>
@@ -239,11 +293,35 @@ const Feedback = () => {
 							onChange={onEditorChange('description')}
 						/>
 					</Styled.FeedbackEditorContainer>
+					<Styled.RequestImgContainer>
+						<input
+							type="file"
+							name="file"
+							accept="image/*"
+							onChange={(e) => handleImageFileUpload(e)}
+							style={{ display: 'none' }}
+							ref={imageFileUploadRef}
+						/>
+						<Styled.RequestImgButton
+							onClick={() => {
+								imageFileUploadRef && imageFileUploadRef.current.click();
+							}}
+						>
+							<Styled.RequestImgButtonTypo>
+								피드백 이미지
+							</Styled.RequestImgButtonTypo>
+						</Styled.RequestImgButton>
+						<Styled.RequestImgNameWrapper>
+							<Styled.RequestImgNameWrapperTypo>
+								{imageFile?.name}
+							</Styled.RequestImgNameWrapperTypo>
+						</Styled.RequestImgNameWrapper>
+					</Styled.RequestImgContainer>
 				</Styled.FeedbackContainer>
 				<Styled.SubmitButton
 					variant="contained"
 					color="primary"
-					onClick={downloadScreenshot}
+					onClick={onSubmit}
 				>
 					<Styled.SubmitButtonTypo>피드백 제출</Styled.SubmitButtonTypo>
 				</Styled.SubmitButton>

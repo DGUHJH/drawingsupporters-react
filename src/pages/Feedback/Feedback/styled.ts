@@ -34,7 +34,6 @@ export const MenuTitleTypo = styled(Typography)`
 
 export const LayerContainer = styled(Box)`
 	width: 300px;
-	height: 248px;
 	border-radius: 8px;
 	border: 1px #0003 solid;
 	display: flex;
@@ -120,6 +119,35 @@ export const DrawCanvas = styled(CanvasDraw)`
 		position: absolute;
 		top: 0;
 		left: 0;
+	}
+`;
+
+export const DrawButtonContainer = styled(Box)`
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+`;
+
+export const DrawSequenceBackButton = styled(Button)`
+	width: 310px;
+	height: 52px;
+	background: #606060;
+	margin-top: 20px;
+`;
+
+export const DrawDownloadButton = styled(Button)`
+	width: 310px;
+	height: 52px;
+	background: #248bd7;
+	margin-top: 20px;
+`;
+
+export const DrawSequenceButtonTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-weight: bold;
+		font-size: 16px;
+		color: white;
 	}
 `;
 
@@ -229,5 +257,49 @@ export const FeedbackDescriptionEditor = styled(TextField)`
 		width: 100%;
 		margin-top: 10px;
 		color: #248bd7;
+	}
+`;
+
+export const RequestImgContainer = styled(Box)`
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+`;
+
+export const RequestImgButton = styled(Button)`
+	&&& {
+		width: 40px;
+		height: 50px;
+		background: #248bd7;
+		border-radius: 8px;
+	}
+`;
+
+export const RequestImgButtonTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-size: 14px;
+		color: white;
+	}
+`;
+
+export const RequestImgNameWrapper = styled(Box)`
+	width: 190px;
+	height: 50px;
+	background: #fafafa;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	padding: 0 24px;
+	box-sizing: border-box;
+`;
+
+export const RequestImgNameWrapperTypo = styled(Typography)`
+	&&& {
+		font-family: 'Noto Sans Regular';
+		font-size: 14px;
 	}
 `;

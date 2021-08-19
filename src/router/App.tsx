@@ -36,23 +36,37 @@ class App extends React.Component<{}, { width: number }> {
 	render() {
 		return (
 			<Box>
-				<Header />
-				<Switch>
-					<Route exact path="/feedback/feedback/:id" component={Feedback} />
-					<Route exact path="/user/login" component={UserLogin} />
-					<Route exact path="/user/join" component={UserJoin} />
-					<Route exact path="/user/mentor-join" component={MentorJoin} />
-					<Route exact path="/feedback/request" component={FeedbackRequest} />
-					<Route exact path="/feedback/list" component={FeedbackList} />
-					<Route
-						exact
-						path="/feedback/details/:id"
-						component={FeedbackDetails}
-					/>
-					<Route exact path="/request/details/:id" component={RequestDetails} />
-					<Route exact path="/" component={Main} />
-				</Switch>
-				<Footer />
+				{this.state.width > 1000 ? (
+					<>
+						<Header />
+						<Switch>
+							<Route exact path="/feedback/feedback/:id" component={Feedback} />
+							<Route exact path="/user/login" component={UserLogin} />
+							<Route exact path="/user/join" component={UserJoin} />
+							<Route exact path="/user/mentor-join" component={MentorJoin} />
+							<Route
+								exact
+								path="/feedback/request"
+								component={FeedbackRequest}
+							/>
+							<Route exact path="/feedback/list" component={FeedbackList} />
+							<Route
+								exact
+								path="/feedback/details/:id"
+								component={FeedbackDetails}
+							/>
+							<Route
+								exact
+								path="/request/details/:id"
+								component={RequestDetails}
+							/>
+							<Route exact path="/" component={Main} />
+						</Switch>
+						<Footer />
+					</>
+				) : (
+					<Box>모바일은 지원하지 않습니다!</Box>
+				)}
 			</Box>
 		);
 	}
